@@ -10,9 +10,9 @@ public class EventsProcessor {
         long begin = events[0].getTimestamp();
 
         for (int i = 0 + windowSize; i < events.length - windowSize; i += skip){
-            boolean hasBump = WindowProcessor.hasBumpByDiff(Arrays.copyOfRange(events, i - windowSize, i+ windowSize));
+            BumpType bump = WindowProcessor.hasBumpByDiff(Arrays.copyOfRange(events, i - windowSize, i+ windowSize));
 
-            if (hasBump){
+            if (bump != BumpType.NO){
                 System.out.println("Bump at " + (events[i].getTimestamp() - begin) / 1000 + " " + events[i].getLocation());
             }
 

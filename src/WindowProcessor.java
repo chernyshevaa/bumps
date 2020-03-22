@@ -3,23 +3,27 @@ import model.Event;
 // Checks whether the window of events has bump or not
 public class WindowProcessor {
 
-    public static boolean hasBumpByMean(Event[] events){
+    public static BumpType hasBumpByMean(Event[] events){
         float mean = calculateZMean(events);
 
         if (mean > 0.3){
-            return true;
-        }else{
-            return false;
+            return BumpType.HIGH;
+        }else if (mean > 0.2){
+            return BumpType.LOW;
+        }else {
+            return BumpType.NO;
         }
     }
 
-    public static boolean hasBumpByDiff(Event[] events){
+    public static BumpType hasBumpByDiff(Event[] events){
         float diff = calculateZDiff(events);
 
         if (diff > 1){
-            return true;
-        }else{
-            return false;
+            return BumpType.HIGH;
+        }else if (diff > 0.5){
+            return BumpType.LOW;
+        }else {
+            return BumpType.NO;
         }
     }
 
